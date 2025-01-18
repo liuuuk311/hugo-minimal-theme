@@ -1,0 +1,17 @@
+{{ define "main" }}
+
+  {{ partial "pages/hero.html" . }}
+  {{ partial "pages/grid.html" . }}
+
+  <section class="py-16 md:py-32 bg-surface">
+    <div class="max-w-7xl mx-auto px-6">
+        <article>
+          <main class="text-body text-lg">
+            {{ .Content }}
+          </main>
+        </article>
+    </div>
+  </section>
+
+  {{ partial "pages/quote.html" . }}
+{{ end }}

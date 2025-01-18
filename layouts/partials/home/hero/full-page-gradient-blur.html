@@ -1,0 +1,7 @@
+{{ $color := "from-gray-50" }}
+{{ if $.Site.Params.theme.heroGradientBlur }}
+    {{ if eq $.Site.Params.theme.heroGradientColor "dark" }}
+        {{$color = "from-gray-800"}}
+    {{end}}
+    <div class="absolute top-0 left-0 h-1/4 w-full bg-gradient-to-b {{$color}} -z-30 bg-opacity-40"></div>
+{{ end }}

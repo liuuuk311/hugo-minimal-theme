@@ -1,0 +1,28 @@
+{{- $v := .Params.valuePropositionSection }}
+{{ $context := . }}
+{{- with $v }}
+<section class="py-16 md:py-32">
+    {{ $totalElements := len .values }}
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-{{ add $totalElements 1 }} items-center">
+        {{ $borderRadiusLeft := printf "rounded-%[1]s" (or $.Site.Params.theme.borderRadius "none") }}
+        {{ $borderRadiusRight := printf "rounded-%[1]s" (or $.Site.Params.theme.borderRadius "none") }}
+        <div class="bg-accent flex flex-col justify-between gap-4 items-start px-6 py-12 h-full {{ $borderRadiusLeft }}">
+            <p class="uppercase tracking-wide text-sm font-semibold text-body-inverse">{{ .title }}</p>
+            <h2 class="text-xl md:text-4xl font-black mt-2 mb-4 text-surface">{{ .headline }}</h2>
+            <p class="text-body-inverse text-lg md:text-xl ">{{ .subheadline }}</p>
+        </div>
+        {{ range $index, $element := .values }}
+            <div class="bg-background flex flex-col gap-4 items-center justify-center h-full px-6 py-8 {{ if eq $index (sub $totalElements 1) }}{{$borderRadiusRight}}{{end}}">
+                {{ with .icon }}
+                    <span class="h-16 w-16 text-accent mb-4">
+                        {{/*  {{ partial "icon.html" (dict "context" $context "name" . )}}  */}}
+                        {{ partial "icon" . }}
+                    </span>
+                {{ end }}
+                <h2 class="text-xl md:text-2xl font-semibold">{{ .headline }}</h2>
+                <p class="text-lg md:text-xl text-body text-center">{{ .subheadline }}</p>
+            </div>
+        {{ end }}
+    </div>
+</section>
+{{end}}

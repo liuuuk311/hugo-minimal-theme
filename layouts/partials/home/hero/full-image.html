@@ -1,0 +1,44 @@
+{{ $hero := .Params.heroSection }}
+{{ $borderRadius := printf "rounded-%s" (or .Site.Params.theme.borderRadius "none") }}
+{{ $displayImage := and $hero.image (not ($hero.video))}}
+{{ $videoBrightness := "brightness-75" }}
+{{ if $displayImage }}
+    {{ $img := resources.Get $hero.image }}
+    {{ $resized := $img.Resize "1800x" }}
+    <section 
+    class="relative bg-cover bg-center w-full min-h-screen flex items-center" 
+    id="hero" 
+    >
+    {{ partial "home/hero/full-page-gradient-blur.html" . }}
+    <img src="{{ $resized.RelPermalink}}" class="absolute top-0 left-0 w-full h-full object-cover -z-40 brightness-50"/>
+{{ else }}
+    <section class="relative w-full min-h-screen flex items-center" id="hero"  >
+    {{ partial "home/hero/full-page-gradient-blur.html" . }}
+    {{ if eq .Site.Params.theme.heroGradientColor "dark" }}
+    {{$videoBrightness = "brightness-50"}}
+    {{ end }}
+    {{ with resources.Get $hero.video }}
+        <video autoplay muted loop class="absolute top-0 left-0 w-full -z-40 {{$videoBrightness}} h-screen overflow-hidden min-w-full min-h-full max-w-none object-cover">
+        <source src="{{ .RelPermalink }}" type="video/webm">
+        Your browser does not support HTML5 video.
+        </video>
+    {{ end }}
+{{ end }}
+
+<div class="px-5 md:px-24 py-12">
+    <div class="md:mt-24 mt-8 max-w-5xl">
+        <h1 class="lg:text-7xl md:text-6xl text-4xl font-bold mb-4 text-surface">{{ $hero.headline }}</h1>
+        <p class="text-xl mb-6 text-body font-light text-surface">{{ $hero.subheadline }}</p>
+        <div class="flex flex-row gap-6 justify-start">
+            <a 
+            href="{{ $hero.CTAUrl }}" 
+            class="flex items-center bg-accent text-surface font-semibold py-3 px-6 text-sm md:text-lg {{$borderRadius}}"
+            >
+            {{ $hero.CTA }}
+            </a>
+            {{ partial "home/hero/reviews.html" . }}
+        </div>
+        {{ partial "home/hero/stats.html" . }}
+        </div>
+    </div>
+</section>

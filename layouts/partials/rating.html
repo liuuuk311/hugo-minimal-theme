@@ -1,0 +1,53 @@
+<div class="flex gap-1">
+    {{ $context := .context }}
+    {{ $rawRating := .rating }}
+    {{ $rating := float $rawRating }}
+    {{ $integerPart := math.Floor $rating }}
+    {{ $fractionPart := sub $rating $integerPart }}
+
+    <!-- Render full stars for the integer part -->
+    {{ range seq $integerPart }}
+        <span class="w-3 h-3 md:w-5 md:h-5 text-amber-400">
+            {{/*  {{ partial "icon.html" (dict "context" $context "name" "star") }}  */}}
+            {{ partial "icon" "star" }}
+        </span>
+    {{ end }}
+
+    <!-- Render a half star if fractionPart is between thresholds -->
+    {{ if and (gt $fractionPart 0) (lt $fractionPart 1) }}
+        <!-- Adjust this logic as needed: For example, only show half star if fractionPart >= 0.25 and fractionPart <= 0.75 -->
+        {{ if and (ge $fractionPart 0.25) (le $fractionPart 0.75) }}
+            <span class="w-3 h-3 md:w-5 md:h-5 text-amber-400">
+                {{/*  {{ partial "icon.html" (dict "context" $context "name" "star-half") }}  */}}
+                {{ partial "icon" "star-half" }}
+            </span>
+        {{ else if gt $fractionPart 0.75 }}
+            <!-- If very close to next whole number, render another full star -->
+            <span class="w-3 h-3 md:w-5 md:h-5 text-amber-400">
+                {{/*  {{ partial "icon.html" (dict "context" $context "name" "star") }}  */}}
+                {{ partial "icon" "star" }}
+            </span>
+        {{ end }}
+    {{ end }}
+
+    <!-- Calculate how many stars have been displayed -->
+    {{ $usedStars := $integerPart }}
+    {{ if and (gt $fractionPart 0) (lt $fractionPart 1) }}
+        {{ if and (ge $fractionPart 0.25) (le $fractionPart 0.75) }}
+            {{ $usedStars = add $usedStars 1 }}
+        {{ else if gt $fractionPart 0.75 }}
+            {{ $usedStars = add $usedStars 1 }}
+        {{ end }}
+    {{ end }}
+
+    {{ $totalStars := 5 }}
+    {{ $emptyStars := sub $totalStars $usedStars }}
+
+    <!-- Render empty stars -->
+    {{ range seq $emptyStars }}
+        <span class="w-3 h-3 md:w-5 md:h-5 text-gray-400">
+            {{/*  {{ partial "icon.html" (dict "context" $context "name" "star") }}  */}}
+            {{ partial "icon" "star" }}
+        </span>
+    {{ end }}
+</div>

@@ -1,0 +1,5 @@
+{{ if eq .Site.Params.theme.heroType "sideImage" }}
+    {{ partial "home/hero/side-image.html" . }}
+{{ else }}
+    {{ partial "home/hero/full-image.html" . }}
+{{ end }}

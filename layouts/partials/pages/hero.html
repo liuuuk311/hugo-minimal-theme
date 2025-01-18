@@ -1,0 +1,13 @@
+{{ $imgPath := cond (isset .Params "heroSection") .Params.heroSection.image .Site.Params.defaultHero }}
+{{ $img := resources.Get $imgPath }}
+{{ if $img }}
+<section 
+class="relative bg-cover bg-center w-full min-h-96 flex items-center" 
+id="hero" 
+>
+    {{ partial "pages/hero-gradient-blur.html" . }}
+    {{ with $img }}
+        <img src="{{ .RelPermalink}}" class="absolute top-0 left-0 w-full h-full object-cover -z-40 brightness-75"/>
+    {{ end }}
+</section>
+{{ end }}

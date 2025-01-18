@@ -1,0 +1,20 @@
+{{ define "main" }}
+  {{ partial "pages/hero.html" . }}
+  {{ partial "pages/text-and-images.html" . }}
+  {{ partial "about-us/stats.html" . }}
+
+  {{ if .Content }}
+  <section class="py-16 md:py-32">
+    <div class="max-w-7xl mx-auto px-6">
+        <article>
+          <div class="mb-8">
+            <h1 class="text-3xl md:text-6xl font-bold">{{ .Title }}</h1>
+          </div>
+          <main class="text-body text-lg">
+            {{ .Content }}
+          </main>
+        </article>
+    </div>
+  </section>
+  {{ end }}
+{{ end }}

@@ -1,0 +1,11 @@
+{{- $stats := .Params.heroSection.stats -}}
+{{- if $stats }}
+<div class="grid grid-cols-2 md:grid-cols-3 gap-6 mt-12 md:absolute md:bottom-12 md:divide-x md:divide-gray-200 md:-ml-16">
+  {{ range $stats }}
+  <div class="md:px-16">
+    <div class="md:text-6xl text-4xl font-medium {{if eq $.Site.Params.theme.heroType "fullImage" }}text-surface{{else}}text-primary{{end}}">{{ .value }}</div>
+    <div class="text-sm md:text-md mt-2 font-semibold {{if eq $.Site.Params.theme.heroType "fullImage" }}text-body-inverse{{else}}text-body{{end}}">{{ .label }}</div>
+  </div>
+  {{ end }}
+</div>
+{{- end }}

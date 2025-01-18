@@ -1,0 +1,19 @@
+<style>
+  :root {
+    --primary-color: {{ .Site.Params.theme.primaryColor | default "#1d4ed8" }};
+    --accent-color: {{ .Site.Params.theme.accentColor | default "#10b981" }};
+    --background-color: {{ .Site.Params.theme.backgroundColor | default "#f9fafb" }};
+    --surface-color: {{ .Site.Params.theme.surfaceColor | default "#ffffff" }};
+    --text-color: {{ .Site.Params.theme.textColor | default "#111827" }};
+    --text-color-inverse: {{ .Site.Params.theme.inverseTextColor | default "#ffffff" }};
+  }
+</style>
+{{- with resources.Get "css/main.css" }}
+  {{- if eq hugo.Environment "development" }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}">
+  {{- else }}
+    {{- with . | minify | fingerprint }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+    {{- end }}
+  {{- end }}
+{{- end }}

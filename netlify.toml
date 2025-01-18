@@ -1,0 +1,6 @@
+[build]
+publish = "public"
+command = "hugo --source exampleSites/plumbingExample --destination ../../public/ --minify"
+
+[build.environment]
+  HUGO_VERSION = "0.121.2"

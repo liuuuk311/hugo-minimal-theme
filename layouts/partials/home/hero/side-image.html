@@ -1,0 +1,44 @@
+{{ $hero := .Params.heroSection }}
+{{$color := "before:from-gray-50"}}
+<section class="relative" id="hero">
+  <div class="grid grid-cols-1 md:grid-cols-8">
+    <div class="col-span-3">
+      {{ with resources.Get $hero.image }}
+        {{ $resized := .Resize "1800x" }}
+        {{ if  $.Site.Params.theme.heroGradientBlur }}
+          {{ if eq $.Site.Params.theme.heroGradientColor "dark" }}
+            {{$color = "before:from-gray-800"}}
+           {{end}}
+        <div class="relative w-full before:absolute before:left-0 before:right-0 before:top-0 before:z-10 before:h-1/2 before:w-full before:bg-gradient-to-b {{$color}} before:opacity-50">
+        {{ else }}
+        <div>
+        {{end}}
+          <img 
+            src="{{ $resized.RelPermalink }}"
+            alt="{{ $hero.AltText | default "Hero Image" }}"
+            class="w-full h-full md:min-h-screen object-cover  {{ if $.Site.Params.theme.borderRadius}}md:rounded-br-3xl{{end}} -z-40"
+          >
+        </div>
+        
+      {{end}}
+    </div>
+
+    <div class="col-span-5 flex items-center px-5 md:px-20 md:py-12 py-4">
+      <div class="md:mt-24 mt-8">
+        <h1 class="lg:text-7xl md:text-6xl text-4xl font-bold mb-4">{{ $hero.headline }}</h1>
+        <p class="text-xl mb-6 text-body font-light">{{ $hero.subheadline }}</p>
+        <div class="flex flex-row gap-6">
+          {{ $borderRadius := printf "rounded-%s" (or .Site.Params.theme.borderRadius "none") }}
+          <a 
+            href="{{ $hero.CTAUrl }}" 
+            class="flex items-center bg-accent text-surface font-semibold py-3 px-6 text-sm md:text-lg {{$borderRadius}}"
+          >
+            {{ $hero.CTA }}
+          </a>
+          {{ partial "home/hero/reviews.html" . }}
+        </div>
+        {{ partial "home/hero/stats.html" . }}
+      </div>
+    </div>
+  </div>
+</section>

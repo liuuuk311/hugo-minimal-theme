@@ -1,0 +1,7 @@
+<div>
+    <h6 class="font-semibold md:text-2xl text-xl mb-6 text-surface">{{ .Site.Params.footer.contactTitle }}</h6>
+    <div class="flex flex-col gap-2">
+        <a href="mailto:{{- .Site.Params.contacts.emailAddress -}}" class="hover:underline">{{ .Site.Params.contacts.emailAddress }}</a>
+        <a href="tel:{{ replace .Site.Params.contacts.phoneNumber " " ""}}" class="hover:underline">{{ .Site.Params.contacts.phoneNumber}}</a>
+    </div>
+</div>

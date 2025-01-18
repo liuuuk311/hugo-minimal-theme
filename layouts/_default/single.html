@@ -1,0 +1,21 @@
+{{ define "main" }}
+  {{ partial "pages/hero.html" . }}
+  <section class="py-16 md:py-32">
+    <div class="max-w-7xl mx-auto px-6">
+        <article>
+          <div class="mb-8">
+            <h1 class="text-3xl md:text-6xl font-bold">{{ .Title }}</h1>
+            {{ if eq .Type "posts" }}
+              {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+              {{ $dateHuman := .Date | time.Format ":date_long" }}
+              <time datetime="{{ $dateMachine }}" class="font-light text-sm">{{ $dateHuman }}</time>
+            {{ end }}
+          </div>
+          <main class="text-body text-lg">
+            {{ .Content }}
+          </main>
+          {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+        </article>
+    </div>
+  </section>
+{{ end }}

@@ -1,0 +1,24 @@
+name = 'Minimal Business'
+license = 'MIT'
+licenselink = 'https://github.com/owner/repo/LICENSE'
+description = 'Theme description'
+
+# The home page of the theme, where the source can be found
+homepage = 'https://github.com/liuuuk311/hugo-minimal-smb'
+
+# If you have a running demo of the theme
+demosite = 'https://owner.github.io/repo'
+
+# Taxonomy terms
+tags = ['blog', 'company']
+features = ['some', 'awesome', 'features']
+
+authors = [
+  {name = 'Luca Palonca', homepage = 'lucapalonca.com'},
+]
+
+# If the theme has a single author
+[author]
+  name = 'Luca Palonca'
+  homepage = 'lucapalonca.com'
+

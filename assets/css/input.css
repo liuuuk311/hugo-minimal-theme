@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .bg-primary {
+    background-color: var(--primary-color);
+  }
+  .text-primary {
+    color: var(--primary-color);
+  }
+
+  .bg-accent {
+    background-color: var(--accent-color);
+  }
+
+  .text-accent {
+    color: var(--accent-color);
+  }
+
+  .border-accent {
+    border-color: var(--accent-color);
+  }
+
+  .bg-background {
+    background-color: var(--background-color);
+  }
+
+  .bg-surface {
+    background-color: var(--surface-color);
+  }
+
+  .text-body {
+    color: var(--text-color);
+  }
+
+  .text-body-inverse {
+    color: var(--text-color-inverse);
+  }
+
+  .text-surface {
+    color: var(--surface-color);
+  }
+
+  
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+  /* Font-Awesome recommends -.125em vertical alignment (https://fontawesome.com/how-to-use/on-the-web/advanced/svg-symbols) 
+     However, I mostly find myself using the following which looks better for some icons: */
+  vertical-align: -.140em;
+  fill: currentColor;
+}
+
+article ul { 
+  list-style-type: disc; 
+  list-style-position: inside; 
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+article ol { 
+  list-style-type: decimal; 
+  list-style-position: inside; 
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+article li {
+  margin-left: 1rem;
+}
+
+article p {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+article a {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+article a:hover {
+  text-decoration: underline;
+}
+
+article h1 {
+  font-size: 3rem; /* 48px */
+  line-height: 1;
+  font-weight: 700;
+}
+
+article h2 {
+  font-size: 2.25rem; /* 36px */
+  line-height: 2.5rem; /* 40px */
+  font-weight: 600;
+}
+
+article h3 {
+  font-size: 1.875rem; /* 30px */
+  line-height: 2.25rem; /* 36px */
+  font-weight: 600;
+}
+
+article h4 {
+  font-size: 1.5rem; /* 24px */
+  line-height: 2rem; /* 32px */
+  font-weight: 600;
+}

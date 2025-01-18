@@ -1,0 +1,29 @@
+{{ $context := . }}
+{{ $borderRadius := printf "rounded-%s" (or .Site.Params.theme.borderRadius "none") }}
+{{ with .Params.listingSection }}
+    {{ $section := cond (not (eq .section "")) .section .CurrentSection.section}}
+    {{ $pages := where $.Site.RegularPages.ByWeight "Section" .section }}
+    <section class="py-16 md:py-32 bg-background">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-8 items-center">
+                <div class="col-span-8">
+                        <p class="uppercase tracking-wide text-sm font-semibold text-background">{{.title}}</p>
+                    <h2 class="text-4xl md:text-6xl font-bold mt-2 mb-8">{{.headline}}</h2>
+                </div>
+            </div>
+            {{ $cardPartial := cond (eq .cardType "simple") "pages/cards/simple.html" "pages/cards/full-image.html"}}
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+                {{ range $pages }} 
+                    {{ partial $cardPartial . }}
+                {{ end }}
+            </div>
+            {{ if and .viewAllText .viewAllUrl }}
+                <div class="flex justify-center">
+                    <a href="{{ .viewAllUrl }}" class="bg-accent text-surface {{$borderRadius}} font-semibold py-3 px-4 xl:px-6 text-sm md:text-md 2xl:text-lg">
+                    {{ .viewAllText }}
+                    </a>
+                </div>
+            {{ end }}
+        </div>
+    </section>
+{{ end }}

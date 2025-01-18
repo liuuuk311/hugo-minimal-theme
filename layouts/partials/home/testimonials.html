@@ -1,0 +1,25 @@
+{{ with .Params.testimonialSection }}
+<section class="py-16 md:py-32 bg-background">
+    <div class="max-w-7xl mx-auto px-6">
+      <p class="uppercase tracking-wide text-sm font-semibold text-backgorund">{{.title}}</p>
+      <h2 class="text-4xl md:text-6xl font-bold mt-2 mb-8">{{.headline}}</h2>
+      {{ $services := $.Site.GetPage "section" "testimonials" }}
+      {{ if $services }}
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {{ $borderRadius := printf "rounded-%s" (or $.Site.Params.theme.borderRadius "none") }}
+          {{ range $services.RegularPages.ByWeight }} 
+            <div class="bg-surface shadow-sm p-8 {{$borderRadius}} shadow-md">
+            <blockquote class="text-body font-light text-xl mb-4">{{ .Params.quote }}</blockquote>
+            <h5 class="text-md font-semibold">{{ .Params.author }}</h5>
+              <div class="flex gap-2 items-center">
+                  <div class="font-black text-2xl">{{ .Params.rating }}</div>
+                  {{ partial "rating.html" (dict "context" . "rating" .Params.rating )}}
+              </div>
+              
+            </div>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+  </section>
+  {{end}}

@@ -1,0 +1,67 @@
+{{ $beforeImg := .Get "before" }}
+{{ $afterImg := .Get "after" }}
+
+{{ $borderRadius := printf "rounded-%s" (or .Site.Params.theme.borderRadius "none") }}
+
+<div class="mx-auto my-12">
+  <div 
+    id="before-after-slider"
+    class="relative w-full aspect-video overflow-hidden border border-gray-300 {{$borderRadius}}"
+  >
+    {{ with .Page.Resources.Get $afterImg }}
+    <div
+      id="before-image"
+      class="absolute inset-0 bg-no-repeat bg-left-top"
+      style="
+        background-image: url('{{ .RelPermalink }}');
+        background-size: cover;
+      "
+    >
+    </div>
+    {{ end }}
+
+
+    {{ with .Page.Resources.Get $beforeImg }}
+    <div
+      id="after-image"
+      class="absolute inset-0 bg-no-repeat bg-left-top overflow-hidden"
+      style="
+        width: 50%;
+        background-image: url('{{ .RelPermalink }}');
+        background-size: cover;
+      "
+    >
+    </div>
+    {{ end }}
+
+    <div
+      id="resizer"
+      class="absolute top-0 bottom-0 left-1/2 w-[4px] bg-white border border-gray-500 cursor-col-resize hover:bg-gray-300 flex items-center justify-center"
+      style="margin-left: -2px;"
+    >   
+        <div class="bg-surface rounded-full p-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-6 h-6 text-primary"><!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M377.941 169.941V216H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.568 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296h243.882v46.059c0 21.382 25.851 32.09 40.971 16.971l86.059-86.059c9.373-9.373 9.373-24.568 0-33.941l-86.059-86.059c-15.119-15.12-40.971-4.412-40.971 16.97z"></path></svg>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+{{ define "scripts" }}
+  {{- with resources.Get "js/before-after.js" }}
+    {{- if eq hugo.Environment "development" }}
+      {{- with . | js.Build }}
+        <script src="{{ .RelPermalink }}"></script>
+      {{- end }}
+    {{- else }}
+      {{- $opts := dict "minify" true }}
+      {{- with . | js.Build $opts | fingerprint }}
+        <script 
+          src="{{ .RelPermalink }}" 
+          integrity="{{ .Data.Integrity }}" 
+          crossorigin="anonymous">
+        </script>
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{ end }}

@@ -1,0 +1,14 @@
+{{ with .Params.statsSection }}
+<section class="py-16 md:py-32 bg-background">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 items-center gap-6 md:divide-x-2 md:divide-gray-800">
+          {{ range .stats }} 
+            <div class="flex flex-col items-center gap-2">
+                <h3 class="md:text-7xl text-5xl font-black leading-7 text-primary">{{ .value }}</h3>
+                <h4 class="text-sm md:text-lg mt-2 font-semibold text-body">{{ .text }}</h4>
+            </div>
+          {{ end }}
+        </div>
+    </div>
+  </section>
+  {{end}}

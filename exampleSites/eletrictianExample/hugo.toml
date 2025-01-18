@@ -1,0 +1,72 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'My New Hugo Site'
+
+[module]
+  replacements = "github.com/liuuuk311/hugo-minimal-smb -> ../../.."
+  [[module.imports]]
+    path = "github.com/liuuuk311/hugo-minimal-smb"
+  
+  [[module.imports]]
+    path = "github.com/hugo-mods/icons"
+
+[params]
+  logo = "images/logo.png"
+  defaultHero = "images/home/hero_full.png"
+  
+  [params.theme]
+    primaryColor = "#171A1A"      # e.g., a strong blue
+    accentColor = "#d95f2b"       # e.g., a green accent
+    backgroundColor = "#F3F5F4"   # a very light gray
+    surfaceColor = "#ffffff"      # white for card backgrounds
+    textColor = "#222727"         # near-black for maximum contrast
+    inverseTextColor = "#F3F5F4"  # a white color for dark backgrounds
+    heroType = "sideImage"        # sideImage or fullImage
+    heroGradientBlur = true       # true or false
+    heroGradientColor = 'light'   # light or dark
+    borderRadius = "lg"
+
+  [[params.social]]
+    url = "https://whatsapp.com/username"
+    icon = "fab whatsapp"
+
+  [[params.social]]
+    url = "https://twitter.com/username"
+    icon = "fab twitter"
+
+  [[params.social]]
+    url = "https://facebook.com/username"
+    icon = "fab facebook"
+
+  [[params.social]]
+    url = "https://instagram.com/username"
+    icon = "fab instagram"
+
+  [[params.social]]
+    url = "https://tiktok.com/username"
+    icon = "fab tiktok"
+
+  [params.footer]
+    headline = "Eletrical services with a quality guarantee"
+    addressTitle = "Address"
+    address = "The USA —<br>785 15h Street, Office 478<br>Boston, MD 02130"
+    contactTitle = "Contact Us"
+  
+  [params.contacts]
+    phoneNumber = "+1 800 555 25 69"
+    emailAddress = "info@email.com"
+    workingHours = "8:00 AM to 6:00 PM"
+    workingDays = "Monday to Saturday"
+
+  [params.header]
+    CTAText = "800 555 25 69"
+    CTAUrl = "tel:+18005552569"
+    subHeading = "Mon to Sat - 8AM to 6PM"
+    secondaryCTAText = "Book online"
+    secondaryCTAUrl = "#"
+
+  [params.reviews]
+    image = "images/google.png"
+    rating = 4.8
+    reviewText = "(73 reviews)"
+    reviewUrl = "#"

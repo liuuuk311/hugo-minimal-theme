@@ -1,0 +1,12 @@
+{{ if .Site.Params.social }}
+<div class="flex flex-row gap-4 py-2 mt-4">
+  {{ range .Site.Params.social }}
+    {{ if and (isset . "url") (isset . "icon") }}
+    <a href="{{ .url }}" class="w-8 h-8">
+      {{/*  {{ partial "icon" (dict "context" . "name" .icon) }}  */}}
+      {{ partial "icon" .icon }}
+    </a>
+    {{ end }}
+  {{ end }}
+</div>
+{{ end }}

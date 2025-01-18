@@ -1,0 +1,84 @@
+{{- $feature := .Params.textAndImagesSection }}
+{{ $context := . }}
+{{- with $feature }}
+
+<section class="py-16 md:py-32">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+    <div>
+      <p class="uppercase tracking-wide text-sm font-semibold text-background">{{ .title }}</p>
+      <h2 class="text-4xl md:text-6xl font-bold mt-2 mb-4">{{ .headline }}</h2>
+      {{ with .subheadline }}
+        <p class="text-2xl md:text-3xl text-body my-8">{{ . }}</p>
+      {{ end }}
+      <p class="text-xl mb-6 text-body font-light">{{ .description | safeHTML }}</p>
+      {{ with .bulletPoint }}
+        <ul class="grid grid-cols-2 md:gap-6 gap-y-4 gap-x-1 mb-8 text-md font-light text-body">
+          {{ range . }}
+            <li class="flex gap-2">
+              {{ with .icon }}
+                <span class="h-5 w-5 text-accent">
+                  {{/*  {{ partial "icon.html" (dict "context" $context "name" . )}}  */}}
+                  {{ partial "icon" . }}
+                </span>
+              {{ end }}
+              {{ .text }}
+            </li>
+          {{ end }}
+        </ul>
+      {{ end }}
+      
+      <div class="flex space-x-4 items-center">
+        {{ with .primaryCTA }}
+          <a href="{{ .ctaUrl }}" class="flex items-center gap-2 bg-accent text-surface font-semibold py-3 px-6 rounded-md hover:opacity-90">
+            {{if .ctaIcon}}
+              <span class="w-5 h-5">
+                {{/*  {{partial "icon.html" (dict "context" . "name" .ctaIcon)}}  */}}
+                {{ partial "icon" .ctaIcon }}
+              </span>
+            {{end}}
+            {{ .ctaText }}
+          </a>
+        {{ end }}
+        {{ with .secondaryCTA }}
+          <a href="{{ .ctaUrl }}" class="flex items-center gap-2 bg-background text-body font-semibold py-3 px-6 rounded-md hover:opacity-90">
+              {{if .ctaIcon}}
+                <span class="w-5 h-5">
+                    {{/*  {{partial "icon.html" (dict "context" . "name" .ctaIcon)}}  */}}
+                    {{partial "icon" .ctaIcon }}
+                </span>
+              {{end}}
+              {{ .ctaText }}
+            </a>
+        {{ end }}
+      </div>
+    </div>
+
+    <div class="relative flex space-x-4 mt-24 md:mt-0">
+        {{ $borderRadius := printf "rounded-%s" (or $.Site.Params.theme.borderRadius "none") }}
+        <div class="relative flex items-center">
+            {{ with resources.Get .image }}
+                {{ $resized := .Resize "500x" }}
+              <img 
+                src="{{ $resized.RelPermalink }}" 
+                width="{{ $resized.Width }}" 
+                height="{{ $resized.Height }}" 
+                alt="{{ $feature.imageAlt }}" 
+                class="{{ $borderRadius }} relative z-10 object-cover h-full w-[65%] xl:w-full aspect-square"
+              >
+            {{ end }}
+          
+            {{ with resources.Get .image2 }}
+                {{ $resized := .Resize "500x" }}
+              <img 
+                src="{{ $resized.RelPermalink }}" 
+                width="{{ $resized.Width }}" 
+                height="{{ $resized.Height }}" 
+                alt="{{ $feature.image2Alt }}" 
+                class="{{ $borderRadius }} relative object-cover xl:-ml-64 xl:-mt-48 -ml-24 -mt-24 w-[65%] h-full xl:w-full aspect-square"
+              >
+            {{ end }}
+          </div>
+    </div>
+  </div>
+</section>
+{{- end }}

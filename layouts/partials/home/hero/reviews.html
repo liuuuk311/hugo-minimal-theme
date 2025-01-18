@@ -1,0 +1,13 @@
+
+<div class="flex gap-2 items-center {{if eq .Site.Params.theme.heroType "fullImage" }}text-surface{{end}}">
+    {{ with resources.Get .Site.Params.reviews.image }}
+        <img src="{{.RelPermalink}}" class="h-full max-w-12 max-h-12"/>
+    {{end}}
+    <div>
+        <div class="flex flex-col md:flex-row md:items-center md:gap-2">
+            <h4 class="font-black text-lg md:text-xl">{{ .Site.Params.reviews.rating }}</h4>
+            <a class="font-light text-xs md:text-sm hover:underline" href="{{ .Site.Params.reviews.reviewUrl }}">{{ .Site.Params.reviews.reviewText }}</a>
+        </div>
+        {{ partial "rating.html" (dict "context" . "rating" .Site.Params.reviews.rating )}}
+    </div>
+</div>

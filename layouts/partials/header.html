@@ -1,0 +1,36 @@
+<div class="grid grid-cols-8 px-5 py-3 md:px-14 md:py-5 items-center transition duration-300 ease-in w-full z-50" id="navbar">
+    <div class="col-span-3 md:px-8">
+        <a href="/">
+            {{ with resources.Get .Site.Params.logo }}
+              <img src="{{ .RelPermalink }}" alt="Site Logo" class="max-h-24 max-w-48">
+            {{ end }}
+        </a>
+    </div>
+    <div class="col-start-8 md:col-start-4 md:col-end-6 md:pl-8 xl:pl-12 2xl:pl-16">
+        {{ partial "menu.html" (dict "menuID" "main" "page" .Page) }}
+    </div>
+    <div class="hidden md:flex flex-col md:col-start-7 items-end">
+      <a 
+          href="{{ .Site.Params.header.CTAUrl }}" 
+          class="float-end text-accent font-bold xl:font-black text-md 2xl:text-xl"
+        >
+          {{ .Site.Params.header.CTAText }}
+        </a>
+        <p class="float-end font-medium hidden xl:flex text-xs 2xl:text-sm -mt-1">{{ .Site.Params.header.subHeading }}</p>
+    </div>
+    {{ if .Site.Params.header.secondaryCTAText }}
+    <div class="hidden md:flex md:col-start-8 items-end ml-2 lg:ml-4 2xl:ml-6">
+      {{ $borderRadius := printf "rounded-%s" (or .Site.Params.theme.borderRadius "none") }}
+      <a 
+        href="{{ .Site.Params.header.secondaryCTAUrl }}" 
+        class="flex items-center self-end bg-accent text-surface font-semibold py-3 px-4 xl:px-6 text-sm md:text-md 2xl:text-lg {{$borderRadius}}"
+      >
+        {{ .Site.Params.header.secondaryCTAText }}
+      </a>
+    </div>
+    {{ end }}
+</div>
+<a href="{{ .Site.Params.header.CTAUrl }}" class="md:hidden fixed bottom-8 right-8 rounded-full bg-accent text-surface p-5 w-16 h-16 shadow-lg">
+  {{/*  {{ partial "icon.html" (dict "context" . "name" "phone")}}  */}}
+  {{ partial "icon" "phone"}}
+</a>

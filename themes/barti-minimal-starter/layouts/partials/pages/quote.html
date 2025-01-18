@@ -1,0 +1,39 @@
+{{$context := .}}
+{{ with .Params.quoteSection }}
+{{ $borderRadius := printf "rounded-%s" (or $.Site.Params.theme.borderRadius "none") }}
+<section class="py-16 md:py-32 bg-accent text-body-inverse" id="quote">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div>
+                <p class="uppercase tracking-wide text-sm font-semibold">{{.title}}</p>
+                <h2 class="text-5xl md:text-6xl font-bold mt-2 mb-8 text-surface">{{.headline}}</h2>
+                <p class="text-body-inverse">{{.subheadline}}</p>
+                <div class="flex flex-col gap-8 mt-8">
+                    <div class="flex gap-4 items-center">
+                        <div class="w-8 h-8 bg-background {{$borderRadius}} p-2">
+                            <span class="h-5 w-5 text-accent">
+                                {{/*  {{partial "icon.html" (dict "context" $context "name" "phone")}}  */}}
+                                {{partial "icon" "phone"}}
+                            </span>
+                        </div>
+                        <a href="tel:{{ replace $.Site.Params.contacts.phoneNumber " " ""}}" class="hover:underline text-surface">{{ $.Site.Params.contacts.phoneNumber }}</a>
+                    </div>
+                    <div class="flex gap-4 items-center">
+                        <div class="w-8 h-8 bg-background {{$borderRadius}} p-2">
+                            <span class="h-5 w-5 text-accent">
+                                {{/*  {{partial "icon.html" (dict "context" $context "name" "email")}}  */}}
+                                {{partial "icon" "email" }}
+                            </span>
+                        </div>
+                        <a href="mailto:{{- $.Site.Params.contacts.emailAddress -}}" class="hover:underline text-surface">{{ $.Site.Params.contacts.emailAddress }}</a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="h-[600px]">
+                <iframe src="{{.bookingUrl}}" class="w-full h-full {{$borderRadius}}" scrolling="no"></iframe>
+            </div>
+        </div>
+    </div>
+  </section>
+  {{end}}
